@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<label for="city" class="drop1 col-sm-1 control-label">region</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" id="san">
+<option value="0">beijing</option>
+<option value="1">tianjin</option>
+<option value="2">hebei</option>
+<option value="3">shanxi</option>
+<option value="4">neimenggu</option>
+<option value="5">liaoning</option>
+<option value="6">jilin</option>
+<option value="7">heilongjiang</option>
+<option value="8">shanghai</option>
+<option value="9">jiangsu</option>
+<option value="10">zhejiang</option>
+<option value="11">anhui</option>
+<option value="12">fujian</option>
+<option value="13">jiangxi</option>
+<option value="14">	shandong</option>
+<option value="15">	henan</option>
+<option value="16">	hubei</option>
+<option value="17">hunan</option>
+<option value="18">guangdong</option>
+<option value="19">guangxi</option>
+<option value="20">hainan</option>
+<option value="21">	chongqing</option>
+<option value="22">sichuan</option>
+<option value="23">guizhou</option>
+<option value="24">yunnan</option>
+<option value="25">xizang</option>
+<option value="26">shannxi</option>
+<option value="27">gansu</option>
+<option value="28">qinghai</option>
+<option value="29">ningxia</option>
+<option value="30">xinjiang</option>
+<option value="31">taiwan</option>
+<option value="32">xianggang</option>
+<option value="33">aomen</option>
+
+                        </select>
+						
+						 <div class="but col-sm-offset-2 col-sm-6">
+                        <button type="submit" class="btn btn-primary" onclick="getLocation()">Analyze</button>
+                    </div>
+
+
+
+<div id="mapholder"></div>
+
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+<script>
+var x = document.getElementById("demo");
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+
+
+function showPosition(position) {
+var x = document.getElementById("san").value;
+    var lat = ["39.9167", "39.1333", "39.3000","37.7000","44.0000","41.1000","43.7000","48.0000","31.2000","32.9000","29.2000","31.8333","25.9000","27.3000","36.4000","33.9000","31.2000","27.4000","23.4000","23.6000","19.2000","29.5583","30.1333","26.8333","25.0500","31.7056","35.6000","38.0000","35.0000","36.6000","41.0000","23.5000","23.3924","28.0333"];                                                                                                                                 
+	var lon = ["116.3833", "117.1833", "116.7000","112.4000","113.0000","122.3000","126.2000","129.0000","121.5000","119.8000","120.5000","117.0000","118.3000","116.0000","118.4000","113.5000","112.3000","111.8000","113.5000","108.3000","109.7000","106.5667","102.9333","106.8333","101.8667","86.9403","108.4000","102.0000","96.0000","105.3200","85.0000","121.0000","113.2990","110.405"]; 
+    
+    latlon = new google.maps.LatLng(lat[x], lon[x])
+    mapholder = document.getElementById('mapholder')
+    mapholder.style.height = '250px';
+    mapholder.style.width = '500px';
+
+    var myOptions = {
+    center:latlon,zoom:10,
+    mapTypeId:google.maps.MapTypeId.ROADMAP,
+    mapTypeControl:false,
+    navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+    }
+    
+    var map = new google.maps.Map(document.getElementById("mapholder"), myOptions);
+    var marker = new google.maps.Marker({position:latlon,map:map,title:"You are here!"});
+}
+
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            x.innerHTML = "User denied the request for Geolocation."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "Location information is unavailable."
+            break;
+        case error.TIMEOUT:
+            x.innerHTML = "The request to get user location timed out."
+            break;
+        case error.UNKNOWN_ERROR:
+            x.innerHTML = "An unknown error occurred."
+            break;
+    }
+}
+</script>
+
+</body>
+</html>
