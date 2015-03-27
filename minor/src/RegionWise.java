@@ -52,10 +52,10 @@ public class RegionWise extends HttpServlet {
 			String table = "";
 			switch(tabl){
 				case "Bids":
-					table = "Bid_process";
+					table = "bid_r";
 					break ;
 				case "Impressions":
-					table = "imp_process";
+					table = "imp_r";
 					break ;
 				case "Clicks":
 					table = "click_process";
@@ -68,7 +68,7 @@ public class RegionWise extends HttpServlet {
 			String [] city_name = {"unknown","beijing","ianjin","hebei","shanxi","neimenggu","liaoning","jilin","heilongjiang","shanghai","jiangsu","zhejiang","anhui","fujian","jiangxi","shandong","henan","hubei","hunan","guangdong","guangxi","hainan","chongqing","sichuan","guizhou","yunnan","xizang","shannxi","gansu","qinghai","ningxia","xinjiang","taiwan","xianggang","aomen"};
 			long [] city_count = new long[35];
 			for(int i=0;i<city_no.length;i++){
-				String queryString1 = "SELECT count (*) FROM ad_db."+table+" where advertiser_id='"+id+"' AND region='"+city_no[i]+"'";
+				String queryString1 = "SELECT count (*) FROM ad_db."+table+" where advertiser_id='"+id+"' AND region='"+city_no[i]+"'LIMIT 800000";
 				ResultSet result1 = session.execute(queryString1);
 				Row row1 = result1.one();
 				city_count[i] = row1.getLong("count");
